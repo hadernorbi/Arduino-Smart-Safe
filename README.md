@@ -60,7 +60,27 @@ Nyáron még szeretném használni más projektekre is majd, ugyhogy nem szerett
 
 ---
 
-## 4. Tesztelés és eredmények
+## 4. A fejlesztés menete lépésről lépésre
+
+Ebben a fejezetben összeszedtem, hogyan jutottam el az asztalon heverő alkatrészhalmaztól a kész, működő széf dobozig. A folyamat nem volt zökkenőmentes, de a végére minden összeállt. (Ez volt az első projektem, szóval a 0-ról kezdtem).
+
+### 1. fázis: A "Gubanc" az asztalon (Az áramkör összerakása)
+Az első lépés az volt, hogy az alkatrészeket életre keltsem a breadboardon. Először a billentyűzetet kötöttem be, amihez 8 kábel kellett, így hirtelen elég nagy lett a káosz. Ezután jött az LCD kijelző. Itt óriási segítség volt az I2C modul a hátulján, mert az eredeti 6-8 kábel helyett mindössze 4 vezetékkel (5V, GND, SDA, SCL) le tudtam tudni a teljes kijelzőt. Végül rákötöttem a szervomotort is a 10-es pinre.
+
+### 2. fázis: A kód megírása és a szoftveres "nyomozás"
+Miután minden be volt dugva, megírtam a programot az Arduino IDE-ben. Beolvastam a gombokat, és beállítottam, hogy ha a gépelt kód megegyezik a "1234"-gyel, akkor adjon jelet a motornak. Itt jött az első nagyobb elakadás: az LCD kijelző bekapcsolt, de nem írt ki semmit, teljesen üres maradt. 
+
+Először azt hittem, rossz a kódom, ezért átírtam az I2C címet `0x27`-ről `0x3F`-re, de ez sem segített. Végül rájöttem, hogy a kijelző hátulján lévő pici kék csavaron kell rengeteget tekerni, mert a kontraszt miatt a betűk egyszerűen "láthatatlanok" voltak. Amint megtekertem, azonnal megjelent a "SZEF READY" felirat.
+
+### 3. fázis: Az áramellátás rejtélye
+A következő probléma az volt, hogy a szervó bekötése után az LCD elkezdett vibrálni vagy teljesen kikapcsolni. Kis nyomozás után észrevettem, hogy a breadboardomon a piros és kék tápvonal középen fizikailag meg van szakadva. Emiatt az áram nem jutott el a tábla egyik feléből a másikba, és a motor megette az összes energiát a kijelző elől. Fogtam egy-egy jumper kábelt, és onnantól kezdve stabilan működött a teljes rendszer.
+
+### 4. fázis: Barkácsolás és a zár összeszerelése
+A hardver után jött a doboz átalakítása. Kivágtam a helyet az LCD-nek és a billentyüzet kábeleinek is. Majd a szervo motor kábelének is.
+
+---
+
+## 5. Tesztelés és eredmények
 
 ### Funkcionális ellenőrzés
 A tesztelési fázisban az alábbi három fő esetet ellenőriztem szisztematikusan:
