@@ -90,3 +90,6 @@ Csatoltam külön IMG fileokban
 
 ### Videó a működésről
 A projekt működését bemutató videót is feltöltöttem.
+
+### Arduino IDE-ben lévő kód
+A széf működéséhez szükséges kódot is csatoltam az okos_safe.ino nevű fájlban
